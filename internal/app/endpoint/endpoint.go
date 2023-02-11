@@ -14,17 +14,21 @@ type Endpoint struct {
 	s Service
 }
 
-func New() *Endpoint {
-	return &Endpoint{}
+func New(s Service) *Endpoint {
+	return &Endpoint{
+		s: s,
+	}
 }
 
 func (e *Endpoint) Status(ctx echo.Context) error {
+	d := e.s.DaysLeft()
 
-	s := fmt.Sprintf("Количество дней: %d", int64(dur.Hours())/24)
+	s := fmt.Sprintf("Days left: %d", d)
 
 	err := ctx.String(http.StatusOK, s)
 	if err != nil {
 		return err
 	}
+
 	return nil
 }

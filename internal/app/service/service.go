@@ -17,5 +17,4 @@ func (s *Service) DaysLeft() int64 {
 	dur := time.Until(d)
 
 	return int64(dur.Hours()) / 24
-
 }
